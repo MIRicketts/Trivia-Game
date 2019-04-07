@@ -5,3 +5,7 @@ body{
 .h1, h2, h4 {
   color: aliceblue;
 }
+
+#quiz.form{
+  color: aliceblue
+}
