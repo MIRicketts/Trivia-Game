@@ -2,10 +2,4 @@ body{
   background-size: cover;
   background-attachment: fixed;
 }
-.h1, h2, h4 {
-  color: aliceblue;
-}
 
-#quiz.form{
-  color: aliceblue
-}
