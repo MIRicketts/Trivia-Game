@@ -17,7 +17,7 @@
       <h1 class="display-4"><strong>SOCCER TRIVIA</strong></h1>
 
       <!-- create function to start countdown -->
-      <a class="btn btn-primary btn-lg" href="#" id="start">START GAME</a>
+      <button class="btn btn-primary btn-lg" id="start">START GAME</button>
       <!-- create function for count down 60sec -->
       <div>
         <h2>Count Down</h2> <span id="gameTimer"></span>
@@ -27,8 +27,11 @@
     <div class="container text-dark bg-light" background="assets/images/blue balls.png">
       <h1>Soccer Test</h1>
       <form id="quiz-form">
-                </form>
-                <a class="btn btn-primary btn-lg" href="#" id="submit">SUBMIT</a>
+      </form>
+      <button class="btn btn-primary btn-lg" id="submit">SUBMIT</button>
+      <div class="correct" >Correct: <span id="correctAns"></span> 
+     </div>
+     <div class="incorrect"> Incorrect: <span id="incorrectAns" ></span> </div>
     </div>
   </div>
 
@@ -62,19 +65,19 @@
     var questions = [
       {
         question: 'Where was the last Fifa World Cup',
-        answer: 'Russia',
+        answer: "Russia",
         choices: ['Germany', "Russia", "Spain"],
         userAnswer: ""
       },
       {
         question: 'Who is the Goat (Greatest Of All Time)',
-        answer: 'Leo Messi',
+        answer: "Leo Messi",
         choices: ['Wayne Rooney', "Cristiano Ronaldo", "Leo Messi"],
         userAnswer: ""
       },
       {
         question: "Who won the 2018 Ballon d'OR",
-        answer: 'Luca Modric',
+        answer: "Luca Modric",
         choices: ['Luca Modric', "Steven Gerrard", "Zlatan Ibrahimovic"],
         userAnswer: ""
       },
@@ -117,22 +120,29 @@
       {
         question: 'What player is this "Argentina, Barcelona FC, Napoli"',
         answer: 'Diego Maradon',
-        choices: ['Diego Maradon', "Diego Simeone", "Pep Guardiola"]
+        choices: ['Diego Maradon', "Diego Simeone", "Pep Guardiola"],
+        userAnswer: ""
       }
     ];
     // set user score
     var correct = 0;
+    var incorrect = 0;
+
     // function to print all questions to page
     function renderQuestions() {
       // clear out form
       $("#quiz-form").empty();
+
       // Loop through questions array
       questions.forEach(function (question, index) {
+
         // create div to hold question
         var $question = $("<div>").addClass("form-group");
+
         // <div class="form-group"></div>
         // add question to div
         var $label = $("<h4>")
+
           .text(question.question)
           .appendTo($question);
         /*
@@ -176,15 +186,38 @@
     }
     // create on "change" listener for all radio buttons but bind them to quiz-form since it's permanently on the page
     $("#quiz-form").on("change", ".form-check-input", function () {
-      console.log(this);
+      ;
       // GET question index out of "name" attribute so we know what question you answered
       var questionIndex = $(this).attr("name");
-      console.log(questions[questionIndex]);
+
       // get value out of radio button you selected
       var answer = $(this).val();
+
       // set answer to question's userAnswer property
       questions[questionIndex].userAnswer = answer;
     });
+
+    $("#submit").on("click", function () {
+      // check if user answer = correct ans
+      for (var i = 0; i < questions.length; i++) {
+        if (questions[i].answer === questions[i].userAnswer) {
+          correct++
+        }
+        else { incorrect++ }
+
+      }
+      console.log(correct, incorrect)
+
+      //print stats to page
+$("#correctAns").append(correct);
+$("#incorrectAns").append(incorrect);
+
+    })
+
+    function endGame() {
+      //end game
+    }
+
     renderQuestions();
   </script>
 

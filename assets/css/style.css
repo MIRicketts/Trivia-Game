@@ -1,5 +1,16 @@
-body{
+body {
   background-size: cover;
   background-attachment: fixed;
 }
 
+.correct {
+  font-size: 24px;
+  margin: 15px;
+  font: bolder;
+}
+
+.incorrect {
+  font-size: 24px;
+  margin: 15px;
+  font: bolder;
+}
