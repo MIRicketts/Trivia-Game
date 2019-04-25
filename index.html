@@ -28,10 +28,10 @@
       <h1>Soccer Test</h1>
       <form id="quiz-form">
       </form>
-      <button class="btn btn-primary btn-lg" id="submit">SUBMIT</button>
-      <div class="correct" >Correct: <span id="correctAns"></span> 
-     </div>
-     <div class="incorrect"> Incorrect: <span id="incorrectAns" ></span> </div>
+      <button class="btn btn-primary btn-lg submit">SUBMIT</button>
+      <div class="correct">Score: <span id="correctAns"></span>
+      </div>
+      <div class="incorrect"> Miss: <span id="incorrectAns"></span> </div>
     </div>
   </div>
 
@@ -43,10 +43,13 @@
 
   <script>
     // <!-- create timer count -->
-    var counter = 60
+    var counter = 10
     var intervalId;
-    // on click function to start
+    // on click function to start game
     $("#start").on("click", start);
+    
+// JQuery show and hide????
+
     function start() {
       clearInterval(intervalId);
       intervalId = setInterval(decrement, 1000);
@@ -55,12 +58,11 @@
       counter--;
       $("#gameTimer").html("<h4>" + counter + "</h4>");
       if (counter === 0) {
-        stop();
+        endGame();
+
       }
     }
-    function stop() {
-      clearInterval(intervalId);
-    }
+
     // create question bank
     var questions = [
       {
@@ -197,7 +199,13 @@
       questions[questionIndex].userAnswer = answer;
     });
 
-    $("#submit").on("click", function () {
+    $(".submit").on("click", function () {
+
+      endGame()
+    })
+
+    function endGame() {
+      clearInterval(intervalId);
       // check if user answer = correct ans
       for (var i = 0; i < questions.length; i++) {
         if (questions[i].answer === questions[i].userAnswer) {
@@ -209,13 +217,8 @@
       console.log(correct, incorrect)
 
       //print stats to page
-$("#correctAns").append(correct);
-$("#incorrectAns").append(incorrect);
-
-    })
-
-    function endGame() {
-      //end game
+      $("#correctAns").append(correct);
+      $("#incorrectAns").append(incorrect);
     }
 
     renderQuestions();
