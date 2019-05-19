@@ -43,8 +43,10 @@
 
   <script>
     // <!-- create timer count -->
-    var counter = 10
+    var counter = 60
     var intervalId;
+
+ 
     // on click function to start game
     $("#start").on("click", start);
     
@@ -54,6 +56,8 @@
       clearInterval(intervalId);
       intervalId = setInterval(decrement, 1000);
     }
+
+
     function decrement() {
       counter--;
       $("#gameTimer").html("<h4>" + counter + "</h4>");
